@@ -15,10 +15,47 @@
 # limitations under the License.
 #
 import webapp2
-
 class MainHandler(webapp2.RequestHandler):
+    form = """
+        <form action="/" method="post">
+            <label>
+                Username
+                <input type="text"/>
+                <input name="Username" value = %(username)s>
+                <div style="color: red">%(error)s</div>
+            </label>
+            <br>
+            <label>
+                Password
+                <input type="password"/>
+            </label>
+            <br>
+            <label>
+                Verify Password
+                <input type="password">
+            </label>
+            <br>
+            <label>
+                Email(Optional)
+                <input type="text">
+            </label>
+            <br>
+            <input type="submit">
+        </form>
+        """
+    #def write_form(self, error="")
+        #self.response.write(form % {"error": error})
+
     def get(self):
-        self.response.write('Hello world!')
+        self.response.write(self.form)
+        #self.write_form()
+
+    def post(self):
+        self.response.write("Thank you")
+        self.write_form("Error Boy!")
+
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
